@@ -2,11 +2,10 @@
 
 A lightweight, high-performance desktop application for viewing and analyzing 3D models. Built with a clean, responsive interface, it provides essential tools for 3D artists, modelers, and designers to inspect their meshes quickly and efficiently.
 
-
-<img width="1767" height="1040" alt="image" src="https://github.com/user-attachments/assets/ecc8d4f5-5e55-4a0c-80cf-9e5057671b66" />
-<img width="1765" height="1037" alt="image" src="https://github.com/user-attachments/assets/59023dc2-f44f-447d-8285-a2216eee73e2" />
 <img width="1767" height="1037" alt="image" src="https://github.com/user-attachments/assets/e1b5779f-d3f4-4ceb-9da9-68e1ee636a50" />
 <img width="1765" height="1041" alt="image" src="https://github.com/user-attachments/assets/c726355e-7f93-43ce-854c-db0d4e66c381" />
+<img width="1364" height="852" alt="image" src="https://github.com/user-attachments/assets/20595056-ac5f-4750-ba06-05fc7e4cda96" />
+
 
 
 Developed by **Azizul Haque Shaon**.
