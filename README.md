@@ -1,40 +1,46 @@
-# Offine 3D Viewer
+# 3D Viewer
 
-A lightweight, high-performance desktop application for viewing and analyzing 3D models. Built with a clean, responsive interface, it provides essential tools for 3D artists, modelers, and designers to inspect their meshes quickly and efficiently.
+A lightweight, fully offline desktop application for viewing and analyzing 3D models with advanced mesh inspection tools, powerful shaders, and customizable lighting.
 
-<img width="1767" height="1037" alt="image" src="https://github.com/user-attachments/assets/e1b5779f-d3f4-4ceb-9da9-68e1ee636a50" />
-<img width="1765" height="1041" alt="image" src="https://github.com/user-attachments/assets/c726355e-7f93-43ce-854c-db0d4e66c381" />
-<img width="1364" height="852" alt="image" src="https://github.com/user-attachments/assets/20595056-ac5f-4750-ba06-05fc7e4cda96" />
+
+<img width="1366" height="851" alt="image" src="https://github.com/user-attachments/assets/135bda01-2072-4a0a-9d4c-537d5d500408" />
+<img width="1925" height="1053" alt="image" src="https://github.com/user-attachments/assets/2aa1ae90-c3a4-47d4-b93c-c3537cc8982f" />
+<img width="1928" height="1045" alt="image" src="https://github.com/user-attachments/assets/6d35b816-f57a-44dd-9bce-55419d4f1a5f" />
+<img width="1934" height="1055" alt="image" src="https://github.com/user-attachments/assets/65a4f956-929d-4c17-bd5f-4f96783ef6f8" />
+<img width="1927" height="1050" alt="image" src="https://github.com/user-attachments/assets/01f9f0fa-ed78-47dd-8ec0-64f04db306de" />
+
+
 
 
 
 Developed by **Azizul Haque Shaon**.
 
-## 🌟 Features
+## 🌟 Key Features
 
-* **📂 Broad Format Support (Current):** Instantly open and view popular 3D formats including `STL`, `OBJ`, `PLY`, `OFF`, `GLTF`, `GLB`, `3MF`, `AMF`, `DAE`, `WRL`, `3DS`, `BIM`, and `FBX`.
-* **👀 Multiple Shading Modes:** Toggle between different viewing states to analyze your models perfectly:
-  * **Solid:** Standard smooth shaded view for evaluating overall form and surface flow.
-  * **Solid + Edges:** View the underlying geometry overlaying the solid mesh, perfect for checking topology.
-  * **Wireframe:** Transparent wireframe mode to inspect complex internal structures and density.
-  * **Flat Shading:** Evaluate the raw polygonal faces without smoothing groups applied.
-* **🌳 Advanced Mesh Hierarchy Tree:** A comprehensive left-hand panel displaying all individual mesh components. Easily isolate, hide, or select specific parts of complex assemblies.
-* **📊 Real-time Detail Statistics:** Instantly view critical model data in the right-hand panel, including:
-  * Vertices, Triangles, and Size dimensions (X, Y, Z).
-  * Volume and Surface Area calculations.
-  * File metadata (Name, Format, File Size, Meshes count, and Load Time).
-* **🌓 Dual Theme Interface:** Seamlessly switch between a professional Dark Theme (default) and a crisp Light Theme to suit your working environment.
-* **📸 One-Click Image Export:** Capture your current viewport directly using the "Save Image" function for quick sharing or portfolio building.
-* **🔄 Z-up Model Orientation:** Toggle axis orientation with a single click to correct models exported from different software ecosystems.
+* **📂 Broad Format Support:** Instantly open and view popular 3D formats including `STL`, `OBJ`, `PLY`, `OFF`, `GLTF`, `GLB`, `3MF`, `AMF`, `DAE`, `WRL`, `3DS`, `BIM`, and `FBX`.
+* **🎨 Modern Interface:** A clean, responsive design featuring a dedicated drag-and-drop welcome screen and a seamless toggle between professional Dark and Light themes.
+* **🎭 Advanced Shaders & Rendering:** Choose from multiple viewport modes to evaluate your models perfectly:
+  * **Standard & Clay:** Excellent for evaluating raw geometry, overall form, and sculpting details.
+  * **Toon:** A cel-shaded look for stylized visualizations.
+  * **Matcap:** Instantly apply complex material and reflection data without heavy lighting calculations.
+  * **Normals:** Visually inspect surface orientations and face normals directly.
+  * **Wireframe & Edges:** Overlay geometry or view transparent wireframes to check topology and density.
+* **💡 Customizable Lighting System:** Full control over your scene's illumination directly from the details panel:
+  * Fine-tune light **Direction, Height, Intensity,** and **Ambient** levels.
+  * Set a custom **Light colour** or enable the **"Light follows camera"** toggle.
+  * *Pro Tip:* Hold `Shift + left-drag` in the viewport to manually rotate the light source around your object in real-time.
+* **🌳 Mesh Hierarchy Tree:** A comprehensive left-hand panel displaying all individual mesh components. Easily isolate, hide, or select specific parts of complex assemblies.
+* **📊 Real-time Detail Statistics:** Instantly view critical model data (Vertices, Triangles, Size dimensions, Volume, Surface Area, and File metadata).
+* **🖼️ Presentation & Export:** Customize the viewport background color for perfect contrast and capture your current view instantly using the one-click "Save Image" function.
+* **🔄 Z-up Orientation:** Toggle axis orientation with a single click to correct models exported from different software ecosystems.
 
-## 🚀 Coming Soon (Next Update)
+## 🚀 Coming Soon
 
-* **⚙️ CAD/BIM Engine Integration:** The next major update will introduce robust support for engineering and architectural formats, including:
-  * `STEP`, `IGES`, `BREP`, `FCSTD`, `IFC`, and `3DM`.
+* **⚙️ CAD/BIM Engine Integration:** The next major update will introduce robust support for engineering and architectural formats, including `STEP`, `IGES`, `BREP`, `FCSTD`, `IFC`, and `3DM`.
 
 ## 🛠️ Usage
 
-Simply drag and drop your supported 3D file directly into the main window, or use the "Open..." button to browse your local directory. Use the top toolbar to switch between shading modes and the side panels for detailed analysis.
+Simply drag and drop your supported 3D file directly into the main window, or use the prominent "Open file..." button. Use the top toolbar to switch between shading modes, and the right-hand panel for detailed analysis and lighting adjustments.
 
 ## 📄 License
 
