@@ -1,0 +1,97 @@
+# Builds the Windows installer and the Linux package on GitHub's servers.
+#
+# How to use: push a tag that starts with "v" (for example v1.0.0). When the run finishes,
+# the files are attached to a draft release on the repository's Releases page.
+# You can also start it by hand from the Actions tab ("Run workflow"); the files are then
+# available as downloadable artifacts of that run.
+#
+# The first run compiles OpenCASCADE and takes roughly an hour. Later runs reuse it.
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  windows:
+    runs-on: windows-2022
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Reuse OpenCASCADE from an earlier run
+        uses: actions/cache@v4
+        with:
+          path: |
+            target/OCCT/include
+            target/OCCT/lib
+          key: occt-7.8.1-windows-msvc-static-crt-v1
+      - uses: Swatinem/rust-cache@v2
+      - name: Test
+        run: cargo test --release --features cad
+      - name: Build
+        run: cargo build --release --features cad
+      - name: Version
+        id: ver
+        shell: bash
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then echo "v=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"; else echo "v=dev" >> "$GITHUB_OUTPUT"; fi
+      - name: Installer
+        shell: pwsh
+        run: |
+          $iscc = "${env:ProgramFiles(x86)}\Inno Setup 6\ISCC.exe"
+          if (-not (Test-Path $iscc)) { choco install innosetup -y --no-progress }
+          & $iscc "/DMyAppVersion=${{ steps.ver.outputs.v }}" packaging\windows\installer.iss
+          Compress-Archive -Path target\release\viewer3d.exe -DestinationPath "installer_output\3DViewer_portable_${{ steps.ver.outputs.v }}_windows.zip"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: installer_output/*
+
+  linux:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+      - name: Build tools
+        run: sudo apt-get update && sudo apt-get install -y cmake g++
+      - name: Reuse OpenCASCADE from an earlier run
+        uses: actions/cache@v4
+        with:
+          path: |
+            target/OCCT/include
+            target/OCCT/lib
+          key: occt-7.8.1-ubuntu-22.04-v1
+      - uses: Swatinem/rust-cache@v2
+      - name: Test
+        run: cargo test --release --features cad
+      - name: Build
+        run: cargo build --release --features cad
+      - name: Package
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then V="${GITHUB_REF_NAME#v}"; else V=dev; fi
+          packaging/linux/make-package.sh target/release/viewer3d "3DViewer_${V}_linux_x86_64"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: linux
+          path: dist/*.tar.gz
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: [windows, linux]
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          path: out
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+          files: out/*

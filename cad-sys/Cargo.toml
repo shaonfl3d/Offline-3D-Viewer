@@ -1,0 +1,18 @@
+[package]
+name = "cad-sys"
+version = "0.1.0"
+edition = "2021"
+build = "build.rs"
+description = "Small C++ shim around OpenCASCADE: read STEP / IGES / BREP and return triangle meshes"
+license = "LGPL-2.1"
+
+[features]
+default = []
+# Build OpenCASCADE from source and link it statically (Windows release builds).
+builtin = ["dep:occt-sys"]
+# Use an OpenCASCADE that is already installed on the system (Linux packages).
+system = []
+
+[build-dependencies]
+cc = "1"
+occt-sys = { version = "7.8.1", optional = true }

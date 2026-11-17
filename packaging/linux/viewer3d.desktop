@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=3D Viewer
+GenericName=3D Model Viewer
+Comment=Open and inspect 3D model files, fully offline
+Exec=viewer3d %f
+Icon=viewer3d
+Terminal=false
+Categories=Graphics;3DGraphics;Viewer;
+MimeType=model/stl;model/obj;model/gltf+json;model/gltf-binary;model/3mf;model/vrml;model/step;model/iges;model/x.stl-binary;model/x.stl-ascii;application/vnd.ms-3mfdocument;application/x-3ds;image/x-3ds;model/vnd.collada+xml;application/x-ply;application/x-fbx;
+StartupWMClass=viewer3d
