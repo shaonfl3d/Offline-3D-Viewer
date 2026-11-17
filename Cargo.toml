@@ -1,6 +1,6 @@
 [package]
 name = "viewer3d"
-version = "3.0.0"
+version = "3.0.1"
 edition = "2021"
 description = "Offline 3D Model Viewer (like an image viewer, but for 3D files)"
 
