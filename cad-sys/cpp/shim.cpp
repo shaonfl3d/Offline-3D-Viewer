@@ -272,7 +272,10 @@ Doc *load_impl(const char *path, int kind, double linear_rel, double angular, st
     angular = 0.5;
   }
   const double deflection = diag * linear_rel;
-  BRepMesh_IncrementalMesh mesher(shape, deflection, Standard_False, angular, Standard_True);
+  // Single-threaded on purpose: parallel meshing starts OpenCASCADE's global thread pool, and that
+  // pool's destructor crashes at program exit (access violation / SIGSEGV) on machines with more
+  // than two cores, because the worker threads are already gone when it runs.
+  BRepMesh_IncrementalMesh mesher(shape, deflection, Standard_False, angular, Standard_False);
   (void)mesher;
 
   Doc *doc = new Doc();
