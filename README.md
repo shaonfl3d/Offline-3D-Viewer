@@ -16,7 +16,7 @@ Developed by **Azizul Haque Shaon**
 
 </div>
 
-<img width="1366" height="851" alt="3D Viewer home screen" src="https://github.com/user-attachments/assets/135bda01-2072-4a0a-9d4c-537d5d500408" />
+<img width="1365" height="853" alt="image" src="https://github.com/user-attachments/assets/d1993821-fe80-440e-a13e-24361f5de979" />
 <img width="1925" height="1053" alt="3D Viewer with a model open" src="https://github.com/user-attachments/assets/2aa1ae90-c3a4-47d4-b93c-c3537cc8982f" />
 <img width="1928" height="1045" alt="Shaders and lighting" src="https://github.com/user-attachments/assets/6d35b816-f57a-44dd-9bce-55419d4f1a5f" />
 <img width="1934" height="1055" alt="Mesh list and details" src="https://github.com/user-attachments/assets/65a4f956-929d-4c17-bd5f-4f96783ef6f8" />
