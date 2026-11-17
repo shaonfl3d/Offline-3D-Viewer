@@ -17,6 +17,8 @@
 #include <Poly_Triangulation.hxx>
 #include <STEPControl_Reader.hxx>
 #include <Standard_Failure.hxx>
+#include <Standard_Transient.hxx>
+#include <Standard_Type.hxx>
 #include <TopAbs_Orientation.hxx>
 #include <TopAbs_ShapeEnum.hxx>
 #include <TopExp_Explorer.hxx>
@@ -37,6 +39,25 @@
 #include <map>
 #include <string>
 #include <vector>
+
+// OpenCASCADE keeps every class type in one global registry, and each type removes itself from it
+// when the program ends. In a statically linked program the registry can be destroyed before some
+// of those types, and the program then crashes on exit (seen as 0xc0000005 / SIGSEGV after all work
+// is done). Creating the registry before every other global object makes it the last one destroyed.
+namespace {
+struct OcctRegistryFirst {
+  OcctRegistryFirst() { (void)STANDARD_TYPE(Standard_Transient); }
+};
+} // namespace
+#if defined(_MSC_VER)
+#pragma warning(disable : 4073)
+#pragma init_seg(lib)
+static OcctRegistryFirst g_occt_registry_first;
+#elif defined(__GNUC__)
+static OcctRegistryFirst g_occt_registry_first __attribute__((init_priority(101)));
+#else
+static OcctRegistryFirst g_occt_registry_first;
+#endif
 
 namespace {
 
@@ -272,10 +293,7 @@ Doc *load_impl(const char *path, int kind, double linear_rel, double angular, st
     angular = 0.5;
   }
   const double deflection = diag * linear_rel;
-  // Single-threaded on purpose: parallel meshing starts OpenCASCADE's global thread pool, and that
-  // pool's destructor crashes at program exit (access violation / SIGSEGV) on machines with more
-  // than two cores, because the worker threads are already gone when it runs.
-  BRepMesh_IncrementalMesh mesher(shape, deflection, Standard_False, angular, Standard_False);
+  BRepMesh_IncrementalMesh mesher(shape, deflection, Standard_False, angular, Standard_True);
   (void)mesher;
 
   Doc *doc = new Doc();
