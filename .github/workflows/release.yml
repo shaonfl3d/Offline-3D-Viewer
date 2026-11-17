@@ -11,6 +11,9 @@ name: Release
 on:
   push:
     tags: ["v*"]
+    # Also build (without making a release) when the code changes, to catch problems early.
+    branches: [main]
+    paths: ["src/**", "cad-sys/**", "Cargo.toml", "Cargo.lock", "build.rs", ".cargo/**", "packaging/**", ".github/workflows/**"]
   workflow_dispatch:
 
 permissions:
@@ -24,7 +27,8 @@ jobs:
     runs-on: windows-2022
     steps:
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@stable
+      # Pinned to a tested Rust version (the test program crashed at exit with Rust 1.100).
+      - uses: dtolnay/rust-toolchain@1.97.0
       - name: Reuse OpenCASCADE from an earlier run
         uses: actions/cache@v4
         with:
@@ -58,7 +62,8 @@ jobs:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@stable
+      # Pinned to a tested Rust version (the test program crashed at exit with Rust 1.100).
+      - uses: dtolnay/rust-toolchain@1.97.0
       - name: Build tools
         run: sudo apt-get update && sudo apt-get install -y cmake g++
       - name: Reuse OpenCASCADE from an earlier run
